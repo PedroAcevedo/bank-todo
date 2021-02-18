@@ -1,0 +1,11 @@
+{
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "emailHint": "Por favor ingrese su correo electrónico",
+    "passwordHint": "Por favor ingrese su contraseña",
+    "emailError": "¡Correo elecrónico invalido!",
+    "passwordError": "La contraseña es demasiado corta",
+    "signIn": "Ingresar",
+    "success": "Ingreso Exitoso",
+    "apiError": "Un error ha ocurrido, contacta con el administrador."
+}

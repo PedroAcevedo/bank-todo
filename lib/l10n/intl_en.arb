@@ -1,0 +1,11 @@
+{
+    "email": "Email address",
+    "password": "Password",
+    "emailHint": "Please enter an email address",
+    "passwordHint": "Please enter a password",
+    "emailError": "Invalid email address!",
+    "passwordError": "The password is too short",
+    "signIn": "Sign in",
+    "success": "Success sign in",
+    "apiError": "An error has been ocurred, contact with the administrator"
+}
