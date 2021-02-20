@@ -34,9 +34,14 @@ dependencies:
   http: ^0.12.2
   intl: ^0.16.1
   shared_preferences:
+  firebase_core: ^0.7.0
   fluttertoast: ^7.1.6
-  firebase_auth: ^0.14.0+5 
-
+  firebase_auth: ^0.20.1
+  firebase_database: ^6.0.0
+  geolocator:
+  money2: ^1.4.3
+  loading_gifs: ^0.2.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

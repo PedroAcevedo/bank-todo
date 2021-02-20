@@ -7,5 +7,10 @@
     "passwordError": "La contraseña es demasiado corta",
     "signIn": "Ingresar",
     "success": "Ingreso Exitoso",
+    "currentAccount": "Corriente",
+    "thriftAccount": "Ahorros",
+    "welcome": "Bienvenido",
+    "hello": "Hola",
+    "seeMore": "Ver clima",
     "apiError": "Un error ha ocurrido, contacta con el administrador."
 }

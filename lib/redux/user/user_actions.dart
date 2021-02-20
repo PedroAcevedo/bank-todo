@@ -1,4 +1,5 @@
 import 'package:bank_todo/data/models/user_model.dart';
+import 'package:bank_todo/ui/main/main_screen.dart';
 
 class StartLoadingAction {
   StartLoadingAction(this.email, this.password);
@@ -18,4 +19,11 @@ class LoginFailedAction {
 
 class LogoutUserAction {
   LogoutUserAction();
+}
+
+class UpdateUserInfo {
+  final UserModel user;
+  final RefreshItemsAction completer;
+
+  UpdateUserInfo(this.user, this.completer);
 }

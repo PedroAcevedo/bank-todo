@@ -1,24 +1,29 @@
 import 'package:bank_todo/redux/user/user_state.dart';
+import 'package:bank_todo/redux/weather/weather_state.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class AppState {
   final UserState userState;
+  final WeatherState weatherState;
 
-  AppState({ @required this.userState});
+
+  AppState({ @required this.userState,  @required this.weatherState});
 
   factory AppState.initial() {
     return AppState(
       userState: UserState.initial(),
+      weatherState: WeatherState.initial()
     );
   }
 
   AppState copyWith({
-    organizationState,
     userState,
+    weatherState,
   }) {
     return AppState(
       userState: userState ?? this.userState,
+      weatherState: weatherState ?? this.weatherState,
     );
   }
 
@@ -27,7 +32,8 @@ class AppState {
       identical(this, other) ||
       other is AppState &&
           runtimeType == other.runtimeType &&
-          userState == other.userState;
+          userState == other.userState &&
+          weatherState == other.weatherState;
 
   @override
   int get hashCode => userState.hashCode;
@@ -36,6 +42,9 @@ class AppState {
   String toString() {
     return 'AppState{'
         '\nuserState: '
-        '\n$userState}';
+        '\n$userState}'
+        '\nweatherState: '
+        '\n$weatherState}'
+        ;
   }
 }

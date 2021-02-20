@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   Utils utils = Utils();
-
+  bool changePage = true;
   String email;
   String password;
 
@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, LoginViewModel>(
       converter: (store) => LoginViewModel.fromStore(store),
+      distinct: false,
       builder: (_, viewModel) => Scaffold(
         body: SafeArea(
           child: Container(
@@ -65,8 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
         if (viewModel.loginError) {
           Fluttertoast.showToast(msg: AppLocalizations.of(context).apiError);
         } else {
-          if (viewModel.user != null) {
-            Fluttertoast.showToast(msg: AppLocalizations.of(context).success);
+          if (viewModel.user != null && changePage) {
+            changePage = false;
+            Navigator.of(context).pushNamed('main');
           }
         }
       },

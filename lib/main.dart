@@ -2,13 +2,14 @@ import 'package:bank_todo/generated/l10n.dart';
 import 'package:bank_todo/redux/store.dart';
 import 'package:bank_todo/routes/main_routes.dart';
 import 'package:bank_todo/styles/colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Redux.init();
   runApp(MyApp());
 }

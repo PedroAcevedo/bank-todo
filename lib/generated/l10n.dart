@@ -115,6 +115,56 @@ class AppLocalizations {
     );
   }
 
+  /// `Current`
+  String get currentAccount {
+    return Intl.message(
+      'Current',
+      name: 'currentAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `thrift`
+  String get thriftAccount {
+    return Intl.message(
+      'thrift',
+      name: 'thriftAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `welcome`
+  String get welcome {
+    return Intl.message(
+      'welcome',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello`
+  String get hello {
+    return Intl.message(
+      'Hello',
+      name: 'hello',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See weather`
+  String get seeMore {
+    return Intl.message(
+      'See weather',
+      name: 'seeMore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error has been ocurred, contact with the administrator`
   String get apiError {
     return Intl.message(

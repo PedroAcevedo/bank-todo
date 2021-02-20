@@ -7,5 +7,10 @@
     "passwordError": "The password is too short",
     "signIn": "Sign in",
     "success": "Success sign in",
+    "currentAccount": "Current",
+    "thriftAccount": "thrift",
+    "welcome": "welcome",
+    "hello": "Hello",
+    "seeMore": "See weather",
     "apiError": "An error has been ocurred, contact with the administrator"
 }

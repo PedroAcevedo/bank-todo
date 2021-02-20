@@ -15,6 +15,10 @@ class LoginMiddleware extends MiddlewareClass<AppState> {
     next(action);
     if (action is StartLoadingAction) {
       return _loginUser(next, action, store); //_loginUser(next, action, store);
+    } else {
+      if (action is UpdateUserInfo) {
+        return _updateUser(next, action, store);
+      }
     }
   }
 
@@ -23,18 +27,53 @@ class LoginMiddleware extends MiddlewareClass<AppState> {
     return Future(() async {
       api.login(action.email, action.password).then((firebaseResponse) {
         if (firebaseResponse['user'] != null) {
-          UserModel userModel = UserModel(
-              id: firebaseResponse['user'] .uid,
-              email: firebaseResponse['user'] .email,
-              token: firebaseResponse['token'].token );
+          Map<String, dynamic> firebaseUser = {
+            "email": firebaseResponse['user'].email,
+            "token": firebaseResponse['token'],
+            "id": firebaseResponse['user'].uid
+          };
 
-          store.dispatch(new LoginSuccessAction(userModel));
+          api.getUserInfo().then((userResponse) {
+            final user = userResponse.value;
+            print(user);
+            if (user != null) {
+              store.dispatch(new LoginSuccessAction(UserModel.fromJson({}
+                ..addAll(firebaseUser)
+                ..addAll(new Map<String, dynamic>.from(user)))));
+            } else {
+              store.dispatch(new LoginFailedAction());
+            }
+          }, onError: (error) {
+            store.dispatch(new LoginFailedAction());
+          });
         } else {
           store.dispatch(new LoginFailedAction());
         }
         //Keys.navKey.currentState.pushNamed('/'); Change screen
       }, onError: (error) {
+        print(error);
         store.dispatch(new LoginFailedAction());
+      });
+    });
+  }
+
+  Future _updateUser(
+      NextDispatcher next, dynamic action, Store<AppState> store) async {
+    return Future(() async {
+      api.getUserInfo().then((userResponse) async {
+        final user = userResponse.value;
+        if (user != null) {
+          await store.dispatch(new LoginSuccessAction(UserModel.fromJson({}
+            ..addAll(action.user.toJson())
+            ..addAll(new Map<String, dynamic>.from(user)))));
+          action.completer.completer.complete();
+        } else {
+          store.dispatch(new LoginFailedAction());
+          action.completer.completer.complete();
+        }
+      }, onError: (error) {
+        store.dispatch(new LoginFailedAction());
+        action.completer.completer.complete();
       });
     });
   }

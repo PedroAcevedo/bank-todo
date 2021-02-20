@@ -22,13 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "apiError" : MessageLookupByLibrary.simpleMessage("Un error ha ocurrido, contacta con el administrador."),
+    "currentAccount" : MessageLookupByLibrary.simpleMessage("Corriente"),
     "email" : MessageLookupByLibrary.simpleMessage("Correo electrónico"),
     "emailError" : MessageLookupByLibrary.simpleMessage("¡Correo elecrónico invalido!"),
     "emailHint" : MessageLookupByLibrary.simpleMessage("Por favor ingrese su correo electrónico"),
+    "hello" : MessageLookupByLibrary.simpleMessage("Hola"),
     "password" : MessageLookupByLibrary.simpleMessage("Contraseña"),
     "passwordError" : MessageLookupByLibrary.simpleMessage("La contraseña es demasiado corta"),
     "passwordHint" : MessageLookupByLibrary.simpleMessage("Por favor ingrese su contraseña"),
+    "seeMore" : MessageLookupByLibrary.simpleMessage("Ver clima"),
     "signIn" : MessageLookupByLibrary.simpleMessage("Ingresar"),
-    "success" : MessageLookupByLibrary.simpleMessage("Ingreso Exitoso")
+    "success" : MessageLookupByLibrary.simpleMessage("Ingreso Exitoso"),
+    "thriftAccount" : MessageLookupByLibrary.simpleMessage("Ahorros"),
+    "welcome" : MessageLookupByLibrary.simpleMessage("Bienvenido")
   };
 }

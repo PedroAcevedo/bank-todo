@@ -19,7 +19,7 @@ class UserState {
   }
 
   UserState copyWith(
-      {bool isLoading, bool loginError, bool tokenValidated, UserModel user}) {
+      {bool isLoading, bool loginError, UserModel user}) {
     return new UserState(
         isLoading: isLoading ?? this.isLoading,
         loginError: loginError ?? this.loginError,
