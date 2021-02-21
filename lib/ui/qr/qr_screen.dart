@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-
+import 'package:bank_todo/widget/widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-
+import '../../generated/l10n.dart';
 
 void main() => runApp(MaterialApp(home: QRViewExample()));
 
@@ -59,7 +59,9 @@ class _QRViewExampleState extends State<QRViewExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // appBar: widgetAppbar(context, "QR"),
+      appBar: WidgetProyect()
+          .widgetAppbar(context, AppLocalizations.of(context).readQr),
+      // appBar: widgetAppbar(context, "QR"),
       backgroundColor: Colors.black,
       body: Column(
         children: <Widget>[
@@ -155,7 +157,7 @@ class _QRViewExampleState extends State<QRViewExample> {
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
+            MediaQuery.of(context).size.height < 400)
         ? 200.0
         : 250.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -183,6 +185,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
       });
+      _showModal(context, result.code);
     });
   }
 
@@ -198,29 +201,21 @@ class _QRViewExampleState extends State<QRViewExample> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController textController = new TextEditingController();
 
-  //2
-  static List<String> _listOfCities = <String>[
-    "Tokyo",
-    "New York",
-    "London",
-    "Paris",
-    "Madrid",
-    "Dubai",
-    "Rome",
-    "Barcelona",
-    "Cologne",
-    "Monte Carlo",
-    "Puebla",
-    "Florence"
-  ];
-
-  void _showModal(context) {
+  void _showModal(context, String code) {
+    int idx = code.indexOf("/");
+    List parts = [
+      code.substring(0, idx).trim(),
+      code.substring(idx + 1).trim(),
+      code.substring(idx + 2).trim(),
+      code.substring(idx + 3).trim(),
+      code.substring(idx + 4).trim()
+    ];
     showModalBottomSheet(
         enableDrag: true,
         barrierColor: Colors.black.withAlpha(1),
         backgroundColor: Colors.transparent,
         isScrollControlled: true,
-        //isDismissible: true,
+        isDismissible: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
         ),
@@ -229,178 +224,61 @@ class _QRViewExampleState extends State<QRViewExample> {
           //3
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                return WillPopScope(
-                  onWillPop: () {
-                   Navigator.pop(context);
-                   Navigator.pop(context);
-                  },
-                  child: DraggableScrollableSheet(
-                      expand: false,
-                      builder: (BuildContext context,
-                          ScrollController scrollController) {
-                        return Column(mainAxisSize: MainAxisSize.min, children: <
-                            Widget>[
-                          SizedBox(
-                            height: 130,
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                              ),
-                              child: ListView.builder(
-                                controller: scrollController,
-                                //shrinkWrap: true,
-                                // physics: NeverScrollableScrollPhysics(),
-                                itemCount: 1,
-                                itemBuilder: (_, index) {
-                                  return Container(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8),
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.keyboard_arrow_up_rounded,
-                                            size: 40,
-                                          ),
-
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Text(
-                                            "Jhon Smith",
-
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-
-                                          Container(
-                                            width: 130,
-                                            height: 130,
-                                            margin: EdgeInsets.all(10),
-                                            child: SvgPicture.asset(
-                                              "",
-                                              color: Colors.black,
-                                              allowDrawingOutsideViewBox: true,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: SizedBox(),
-                                              ),
-                                              Container(
-                                                width: 25,
-                                                height: 25,
-                                                margin: EdgeInsets.all(10),
-                                                child: SvgPicture.asset(
-                                                 " assetsQrCode",
-                                                  color: Colors.black,
-                                                  allowDrawingOutsideViewBox: true,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-
-
-                                              Expanded(
-                                                child: SizedBox(),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 12.0,
-                                          ),
-
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Row(
-                                            children: [
-                                              /* Container(
-                                     width: 30,height: 30,
-                                     margin: EdgeInsets.only(bottom: 20),
-                                     child: CheckboxListTile(
-
-
-                                                title: GestureDetector(
-                                                  onTap: (){
-                                                    alertTerms(context);
-                                                  },
-                                                  child: Text(
-                                                    "Accept terms and conditions",
-                                                    style: styleText(17, Colors.white, false),
-                                                  ),
-                                                ),
-                                                value: checkSignUp,
-                                                onChanged: (newValue) {
-                                                  checkSignUp = newValue;
-                                                  setState(() {});
-                                                },
-                                                controlAffinity: ListTileControlAffinity
-                                                    .leading, //  <-- leading Checkbox
-                                              ),
-                                   ),*/
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                        ],
-                                      ),
+            return DraggableScrollableSheet(
+                expand: false,
+                builder:
+                    (BuildContext context, ScrollController scrollController) {
+                  return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 130,
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: ListView.builder(
+                              controller: scrollController,
+                              //shrinkWrap: true,
+                              // physics: NeverScrollableScrollPhysics(),
+                              itemCount: 1,
+                              itemBuilder: (_, index) {
+                                return Container(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Column(
+                                      children: [
+                                        WidgetProyect().listMoney(
+                                            context,
+                                            parts[3],
+                                            parts[2],
+                                            parts[4],
+                                            parts[1],
+                                            parts[0],
+                                            false),
+                                      ],
                                     ),
-                                  );
-                                },
-                              ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
-                        ]);
-                      }),
-                );
-              });
-        }).whenComplete(() {
-      _showModal(context);
-    });
+                        ),
+                      ]);
+                });
+          });
+        });
   }
 
   //8
-  Widget _showBottomSheetWithSearch(int index, List<String> listOfCities) {
-    return Text(listOfCities[index],
-        style: TextStyle(color: Colors.black, fontSize: 16),
-        textAlign: TextAlign.center);
-  }
-
-  //9
-  List<String> _buildSearchList(String userSearchTerm) {
-    List<String> _searchList = List();
-
-    for (int i = 0; i < _listOfCities.length; i++) {
-      String name = _listOfCities[i];
-      if (name.toLowerCase().contains(userSearchTerm.toLowerCase())) {
-        _searchList.add(_listOfCities[i]);
-      }
-    }
-    return _searchList;
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer.run(() {
-      _showModal(context);
-    });
   }
 }

@@ -254,6 +254,96 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Comment`
+  String get comment {
+    return Intl.message(
+      'Comment',
+      name: 'comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type count`
+  String get typecount {
+    return Intl.message(
+      'Type count',
+      name: 'typecount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cash`
+  String get cash {
+    return Intl.message(
+      'Cash',
+      name: 'cash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select account type`
+  String get selectaccounttype {
+    return Intl.message(
+      'Select account type',
+      name: 'selectaccounttype',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select currency type`
+  String get selectcurrencytype {
+    return Intl.message(
+      'Select currency type',
+      name: 'selectcurrencytype',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required field`
+  String get requiredfield {
+    return Intl.message(
+      'Required field',
+      name: 'requiredfield',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send money`
+  String get sendMoney {
+    return Intl.message(
+      'Send money',
+      name: 'sendMoney',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `insufficient balance`
+  String get insufficientbalance {
+    return Intl.message(
+      'insufficient balance',
+      name: 'insufficientbalance',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

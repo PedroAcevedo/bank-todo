@@ -9,6 +9,7 @@ import 'package:bank_todo/redux/user/user_state.dart';
 import 'package:bank_todo/redux/weather/weather_actions.dart';
 import 'package:bank_todo/redux/weather/weather_state.dart';
 import 'package:bank_todo/styles/colors.dart';
+import 'package:bank_todo/ui/qr/qr_screen.dart';
 import 'package:bank_todo/ui/transferMoney/transferMoney_screen.dart';
 import 'package:bank_todo/utils/adapt_screen.dart';
 import 'package:flutter/material.dart';
@@ -153,17 +154,20 @@ class MainScreen extends StatelessWidget {
         // childMarginTop: 2,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.accessibility),
+            child: Icon(Icons.qr_code_sharp,color: Colors.white,),
             backgroundColor: Colors.red,
             label: AppLocalizations.of(context).createQr,
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
-            Navigator.of(context).pushNamed('sendMoney');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => QRViewExample()),
+              );
             },
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
+
           ),
           SpeedDialChild(
-            child: Icon(Icons.brush),
+            child: Icon(Icons.qr_code_sharp,color: Colors.white,),
             backgroundColor: Colors.blue,
             label: AppLocalizations.of(context).readQr,
             labelStyle: TextStyle(fontSize: 18.0),
@@ -177,7 +181,7 @@ class MainScreen extends StatelessWidget {
             onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.keyboard_voice),
+            child: Icon(Icons.delete,color: Colors.white,),
             backgroundColor: Colors.green,
             label: AppLocalizations.of(context).logout,
             labelStyle: TextStyle(fontSize: 18.0),

@@ -20,5 +20,16 @@
     "americandollar": "American dollar",
     "stream": "stream",
     "ahorro":"saving",
-    "generateQr": "Generate qr"
+    "generateQr": "Generate qr",
+
+    "comment": "Comment",
+    "typecount": "Type count",
+    "cash": "Cash",
+    "selectaccounttype": "Select account type",
+    "selectcurrencytype": "Select currency type",
+    "price": "Price",
+    "requiredfield": "Required field",
+    "sendMoney": "Send money",
+    "insufficientbalance": "insufficient balance",
+    "operationSucefull": "Operacion exitosa"
 }
