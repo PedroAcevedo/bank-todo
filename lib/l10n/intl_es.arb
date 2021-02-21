@@ -12,5 +12,13 @@
     "welcome": "Bienvenido",
     "hello": "Hola",
     "seeMore": "Ver clima",
-    "apiError": "Un error ha ocurrido, contacta con el administrador."
+    "apiError": "Un error ha ocurrido, contacta con el administrador.",
+    "readQr": "Transfer money",
+    "createQr": "Recibir dinero",
+    "logout": "Logout",
+    "colombianpeso": "Colombian peso",
+    "americandollar": "American dollar",
+    "stream": "stream",
+    "ahorro":"saving",
+    "generateQr": "Generate qr"
 }

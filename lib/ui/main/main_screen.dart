@@ -9,9 +9,11 @@ import 'package:bank_todo/redux/user/user_state.dart';
 import 'package:bank_todo/redux/weather/weather_actions.dart';
 import 'package:bank_todo/redux/weather/weather_state.dart';
 import 'package:bank_todo/styles/colors.dart';
+import 'package:bank_todo/ui/transferMoney/transferMoney_screen.dart';
 import 'package:bank_todo/utils/adapt_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:loading_gifs/loading_gifs.dart';
 import 'package:money2/money2.dart';
@@ -36,101 +38,155 @@ class MainScreen extends StatelessWidget {
         color: AppColors.fontColor, fontSize: AdaptScreen.screenWidth() * 0.05);
 
     return Scaffold(
-        body: StoreConnector<AppState, AppState>(
-            converter: (store) => store.state,
-            builder: (context, state) {
-              return RefreshIndicator(
-                  onRefresh: () {
-                    getLocation();
-                    var action = RefreshItemsAction();
-                    Redux.store
-                        .dispatch(UpdateUserInfo(state.userState.user, action));
-                    return action.completer.future;
-                  },
-                  child: state.userState.isLoading
-                      ? CircularProgressIndicator()
-                      : Stack(children: <Widget>[
-                          Positioned(
-                              top: -60.0, right: -35, child: _decorationBox()),
-                          Container(
-                            padding: EdgeInsets.all(15.0),
+      body: StoreConnector<AppState, AppState>(
+          converter: (store) => store.state,
+          builder: (context, state) {
+            return RefreshIndicator(
+                onRefresh: () {
+                  getLocation();
+                  var action = RefreshItemsAction();
+                  Redux.store
+                      .dispatch(UpdateUserInfo(state.userState.user, action));
+                  return action.completer.future;
+                },
+                child: state.userState.isLoading
+                    ? CircularProgressIndicator()
+                    : Stack(children: <Widget>[
+                        Positioned(
+                            top: -60.0, right: -35, child: _decorationBox()),
+                        Container(
+                          padding: EdgeInsets.all(15.0),
+                        ),
+                        Positioned(
+                          top: AdaptScreen.screenHeight() * 0.02,
+                          right: AdaptScreen.screenHeight() * 0.03,
+                          child: SafeArea(
+                            child: _accountInfo(
+                                context,
+                                state.userState.user.current.money,
+                                state.userState.user.thrift.money),
                           ),
-                          Positioned(
-                            top: AdaptScreen.screenHeight() * 0.02,
-                            right: AdaptScreen.screenHeight() * 0.03,
-                            child: SafeArea(
-                              child: _accountInfo(
-                                  context,
-                                  state.userState.user.current.money,
-                                  state.userState.user.thrift.money),
-                            ),
-                          ),
-                          ListView(),
-                          Positioned(
-                              top: AdaptScreen.screenHeight() * 0.48,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${AppLocalizations.of(context).hello} ${state.userState.user.name}, ${AppLocalizations.of(context).welcome}',
-                                      style: TextStyle(
-                                          fontSize:
-                                              AdaptScreen.screenWidth() * 0.05),
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            AdaptScreen.screenHeight() * 0.04),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      child: Center(
-                                          child: Container(
-                                              width: AdaptScreen.screenWidth() *
-                                                  0.95,
-                                              height:
+                        ),
+                        ListView(),
+                        Positioned(
+                            top: AdaptScreen.screenHeight() * 0.48,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${AppLocalizations.of(context).hello} ${state.userState.user.name}, ${AppLocalizations.of(context).welcome}',
+                                    style: TextStyle(
+                                        fontSize:
+                                            AdaptScreen.screenWidth() * 0.05),
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          AdaptScreen.screenHeight() * 0.04),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: Center(
+                                        child: Container(
+                                            width: AdaptScreen.screenWidth() *
+                                                0.95,
+                                            height: AdaptScreen.screenHeight() *
+                                                0.15,
+                                            alignment: Alignment.center,
+                                            color:
+                                                AppColors.boxAlternativeColor,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  AdaptScreen.screenWidth() *
+                                                      0.03,
+                                              vertical:
                                                   AdaptScreen.screenHeight() *
-                                                      0.15,
-                                              alignment: Alignment.center,
-                                              color:
-                                                  AppColors.boxAlternativeColor,
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal:
-                                                    AdaptScreen.screenWidth() *
-                                                        0.03,
-                                                vertical:
-                                                    AdaptScreen.screenHeight() *
-                                                        0.02,
-                                              ),
-                                              child: state.weatherState
-                                                          .current !=
-                                                      null
-                                                  ? _weather()
-                                                  : state.weatherState.isLoading
-                                                      ? CircularProgressIndicator()
-                                                      : FlatButton(
-                                                          onPressed: () {
-                                                            getLocation();
-                                                          },
-                                                          child: Text(
-                                                            AppLocalizations.of(
-                                                                    context)
-                                                                .seeMore,
-                                                            style: titleStyle,
-                                                          )))),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                        ]));
-            }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-          child: Icon(Icons.qr_code),
-          backgroundColor: AppColors.mainColor,
-        ));
+                                                      0.02,
+                                            ),
+                                            child: state.weatherState.current !=
+                                                    null
+                                                ? _weather()
+                                                : state.weatherState.isLoading
+                                                    ? CircularProgressIndicator()
+                                                    : FlatButton(
+                                                        onPressed: () {
+                                                          getLocation();
+                                                        },
+                                                        child: Text(
+                                                          AppLocalizations.of(
+                                                                  context)
+                                                              .seeMore,
+                                                          style: titleStyle,
+                                                        )))),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ]));
+          }),
+      floatingActionButton: SpeedDial(
+        marginEnd: 18,
+        marginBottom: 20,
+
+        icon: Icons.add,
+        activeIcon: Icons.remove,
+
+        buttonSize: 56.0,
+        visible: true,
+
+        closeManually: false,
+
+        renderOverlay: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'),
+        onClose: () => print('DIAL CLOSED'),
+        tooltip: 'Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 8.0,
+        shape: CircleBorder(),
+        // orientation: SpeedDialOrientation.Up,
+        // childMarginBottom: 2,
+        // childMarginTop: 2,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.accessibility),
+            backgroundColor: Colors.red,
+            label: AppLocalizations.of(context).createQr,
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {
+            Navigator.of(context).pushNamed('sendMoney');
+            },
+            onLongPress: () => print('FIRST CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.brush),
+            backgroundColor: Colors.blue,
+            label: AppLocalizations.of(context).readQr,
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: ()  {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => transferMoneyScreen()),
+              );
+
+            },
+            onLongPress: () => print('SECOND CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.keyboard_voice),
+            backgroundColor: Colors.green,
+            label: AppLocalizations.of(context).logout,
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('THIRD CHILD'),
+            onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _weather() {

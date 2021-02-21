@@ -21,17 +21,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "ahorro" : MessageLookupByLibrary.simpleMessage("saving"),
+    "americandollar" : MessageLookupByLibrary.simpleMessage("American dollar"),
     "apiError" : MessageLookupByLibrary.simpleMessage("An error has been ocurred, contact with the administrator"),
+    "colombianpeso" : MessageLookupByLibrary.simpleMessage("Colombian peso"),
+    "createQr" : MessageLookupByLibrary.simpleMessage("Recibir dinero"),
     "currentAccount" : MessageLookupByLibrary.simpleMessage("Current"),
     "email" : MessageLookupByLibrary.simpleMessage("Email address"),
     "emailError" : MessageLookupByLibrary.simpleMessage("Invalid email address!"),
     "emailHint" : MessageLookupByLibrary.simpleMessage("Please enter an email address"),
+    "generateQr" : MessageLookupByLibrary.simpleMessage("Generate qr"),
     "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "passwordError" : MessageLookupByLibrary.simpleMessage("The password is too short"),
     "passwordHint" : MessageLookupByLibrary.simpleMessage("Please enter a password"),
+    "readQr" : MessageLookupByLibrary.simpleMessage("Transfer money"),
     "seeMore" : MessageLookupByLibrary.simpleMessage("See weather"),
     "signIn" : MessageLookupByLibrary.simpleMessage("Sign in"),
+    "stream" : MessageLookupByLibrary.simpleMessage("stream"),
     "success" : MessageLookupByLibrary.simpleMessage("Success sign in"),
     "thriftAccount" : MessageLookupByLibrary.simpleMessage("thrift"),
     "welcome" : MessageLookupByLibrary.simpleMessage("welcome")

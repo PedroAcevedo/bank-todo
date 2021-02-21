@@ -174,6 +174,86 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Transfer money`
+  String get readQr {
+    return Intl.message(
+      'Transfer money',
+      name: 'readQr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recibir dinero`
+  String get createQr {
+    return Intl.message(
+      'Recibir dinero',
+      name: 'createQr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Colombian peso`
+  String get colombianpeso {
+    return Intl.message(
+      'Colombian peso',
+      name: 'colombianpeso',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `American dollar`
+  String get americandollar {
+    return Intl.message(
+      'American dollar',
+      name: 'americandollar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `stream`
+  String get stream {
+    return Intl.message(
+      'stream',
+      name: 'stream',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `saving`
+  String get ahorro {
+    return Intl.message(
+      'saving',
+      name: 'ahorro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Generate qr`
+  String get generateQr {
+    return Intl.message(
+      'Generate qr',
+      name: 'generateQr',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
