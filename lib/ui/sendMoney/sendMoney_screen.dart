@@ -119,7 +119,6 @@ class _sendMoneyScreenState extends State<sendMoneyScreen> {
           validator: (value) {
             if (value.isEmpty) {
               return AppLocalizations.of(context).emailHint;
-              ;
             } else if (!utils.validateEmail(email)) {
               return AppLocalizations.of(context).emailError;
             }

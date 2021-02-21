@@ -125,10 +125,10 @@ class AppLocalizations {
     );
   }
 
-  /// `thrift`
+  /// `Saving`
   String get thriftAccount {
     return Intl.message(
-      'thrift',
+      'Saving',
       name: 'thriftAccount',
       desc: '',
       args: [],
@@ -340,6 +340,16 @@ class AppLocalizations {
     return Intl.message(
       'insufficient balance',
       name: 'insufficientbalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operacion exitosa`
+  String get operationSucefull {
+    return Intl.message(
+      'Operacion exitosa',
+      name: 'operationSucefull',
       desc: '',
       args: [],
     );

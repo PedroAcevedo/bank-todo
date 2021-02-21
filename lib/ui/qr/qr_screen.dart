@@ -203,13 +203,9 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   void _showModal(context, String code) {
     int idx = code.indexOf("/");
-    List parts = [
-      code.substring(0, idx).trim(),
-      code.substring(idx + 1).trim(),
-      code.substring(idx + 2).trim(),
-      code.substring(idx + 3).trim(),
-      code.substring(idx + 4).trim()
-    ];
+    print(code);
+    List parts = code.split("/");
+    print(parts);
     showModalBottomSheet(
         enableDrag: true,
         barrierColor: Colors.black.withAlpha(1),
@@ -255,9 +251,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                                         WidgetProyect().listMoney(
                                             context,
                                             parts[3],
-                                            parts[2],
-                                            parts[4],
-                                            parts[1],
+                                            parts[2] == 'true'? true : false,
+                                            parts[4] == 'true'? true : false,
+                                            int.parse(parts[1])*100,
                                             parts[0],
                                             false),
                                       ],

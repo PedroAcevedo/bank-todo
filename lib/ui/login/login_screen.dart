@@ -143,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (!_formKey.currentState.validate()) return;
           try {
             print("The user info $email and $password");
+            changePage = true;
             loginView.login(email, password);
           } catch (e) {
             print("Error $e");

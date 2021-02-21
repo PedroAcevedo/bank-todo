@@ -62,11 +62,12 @@ class MainScreen extends StatelessWidget {
                           top: AdaptScreen.screenHeight() * 0.02,
                           right: AdaptScreen.screenHeight() * 0.03,
                           child: SafeArea(
-                            child: _accountInfo(
-                                context,
-                                state.userState.user.current.money,
-                                state.userState.user.thrift.money),
-                          ),
+                              child: state.userState.user != null
+                                  ? _accountInfo(
+                                      context,
+                                      state.userState.user?.current?.money,
+                                      state.userState.user?.thrift?.money)
+                                  : CircularProgressIndicator()),
                         ),
                         ListView(),
                         Positioned(
@@ -76,12 +77,15 @@ class MainScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    '${AppLocalizations.of(context).hello} ${state.userState.user.name}, ${AppLocalizations.of(context).welcome}',
-                                    style: TextStyle(
-                                        fontSize:
-                                            AdaptScreen.screenWidth() * 0.05),
-                                  ),
+                                  state.userState.user != null
+                                      ? Text(
+                                          '${AppLocalizations.of(context).hello} ${state.userState.user.name}, ${AppLocalizations.of(context).welcome}',
+                                          style: TextStyle(
+                                              fontSize:
+                                                  AdaptScreen.screenWidth() *
+                                                      0.05),
+                                        )
+                                      : SizedBox.shrink(),
                                   SizedBox(
                                       height:
                                           AdaptScreen.screenHeight() * 0.04),
@@ -154,9 +158,12 @@ class MainScreen extends StatelessWidget {
         // childMarginTop: 2,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.qr_code_sharp,color: Colors.white,),
+            child: Icon(
+              Icons.qr_code_sharp,
+              color: Colors.white,
+            ),
             backgroundColor: Colors.red,
-            label: AppLocalizations.of(context).createQr,
+            label: AppLocalizations.of(context).readQr,
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
               Navigator.push(
@@ -164,28 +171,35 @@ class MainScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => QRViewExample()),
               );
             },
-
           ),
           SpeedDialChild(
-            child: Icon(Icons.qr_code_sharp,color: Colors.white,),
+            child: Icon(
+              Icons.qr_code_sharp,
+              color: Colors.white,
+            ),
             backgroundColor: Colors.blue,
-            label: AppLocalizations.of(context).readQr,
+            label: AppLocalizations.of(context).createQr,
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: ()  {
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => transferMoneyScreen()),
               );
-
             },
             onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.delete,color: Colors.white,),
+            child: Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
             backgroundColor: Colors.green,
             label: AppLocalizations.of(context).logout,
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('THIRD CHILD'),
+            onTap: () async {
+              await Redux.store.dispatch(LogoutUserAction());
+              Navigator.of(context).pushNamedAndRemoveUntil('login', (Route<dynamic> route) => false);
+            },
             onLongPress: () => print('THIRD CHILD LONG PRESS'),
           ),
         ],

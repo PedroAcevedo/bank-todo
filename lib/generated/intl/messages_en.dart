@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
     "insufficientbalance" : MessageLookupByLibrary.simpleMessage("insufficient balance"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "operationSucefull" : MessageLookupByLibrary.simpleMessage("Operacion exitosa"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "passwordError" : MessageLookupByLibrary.simpleMessage("The password is too short"),
     "passwordHint" : MessageLookupByLibrary.simpleMessage("Please enter a password"),
@@ -49,7 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signIn" : MessageLookupByLibrary.simpleMessage("Sign in"),
     "stream" : MessageLookupByLibrary.simpleMessage("stream"),
     "success" : MessageLookupByLibrary.simpleMessage("Success sign in"),
-    "thriftAccount" : MessageLookupByLibrary.simpleMessage("thrift"),
+    "thriftAccount" : MessageLookupByLibrary.simpleMessage("Saving"),
     "typecount" : MessageLookupByLibrary.simpleMessage("Type count"),
     "welcome" : MessageLookupByLibrary.simpleMessage("welcome")
   };

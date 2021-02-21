@@ -7,6 +7,7 @@ final userReducer = combineReducers<UserState>([
   TypedReducer<UserState, LoginFailedAction>(_loginFailed),
   TypedReducer<UserState, StartLoadingAction>(_startLoading),
   TypedReducer<UserState, UpdateUserInfo>(_updateSuccess),
+  TypedReducer<UserState, LogoutUserAction>(_logoutUser),
 ]);
 
 UserState _loginSuccess(UserState state, LoginSuccessAction action) {
@@ -19,6 +20,11 @@ UserState _updateSuccess(UserState state, UpdateUserInfo action) {
 
 UserState _loginFailed(UserState state, LoginFailedAction action) {
   return state.copyWith(user: null, isLoading: false, loginError: true);
+}
+
+
+UserState _logoutUser(UserState state, LogoutUserAction action) {
+  return state.copyWith(user: null, isLoading: false, loginError: false);
 }
 
 UserState _startLoading(UserState state, StartLoadingAction action) {

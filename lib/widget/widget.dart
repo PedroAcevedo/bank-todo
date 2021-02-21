@@ -28,7 +28,7 @@ class WidgetProyect {
           height: 10,
         ),
         Text(
-          type.toString(),
+          '$type',
           style: TextStyle(
               color: Colors.grey, fontSize: AdaptScreen.screenWidth() * 0.05),
         ),
@@ -105,8 +105,8 @@ class WidgetProyect {
                           "money": buy,
                         });
                       });
-                      Fluttertoast.showToast(msg: "Operacion exitosa");
-                      Navigator.pop(context);
+                      Fluttertoast.showToast(msg: AppLocalizations.of(context).operationSucefull);
+                      Navigator.popAndPushNamed(context, 'main');
 
 
                     }

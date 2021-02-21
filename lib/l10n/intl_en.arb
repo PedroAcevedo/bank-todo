@@ -8,7 +8,7 @@
     "signIn": "Sign in",
     "success": "Success sign in",
     "currentAccount": "Current",
-    "thriftAccount": "thrift",
+    "thriftAccount": "Saving",
     "welcome": "welcome",
     "hello": "Hello",
     "seeMore": "See weather",
@@ -31,7 +31,7 @@
     "requiredfield": "Required field",
     "sendMoney": "Send money",
     "insufficientbalance": "insufficient balance",
-    "operationSucefull": "Operacion exitosa",
+    "operationSucefull": "Operacion exitosa"
 
 
 }

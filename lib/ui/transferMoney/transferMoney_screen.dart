@@ -1,7 +1,4 @@
 import 'package:bank_todo/generated/l10n.dart';
-import 'package:bank_todo/redux/app_state.dart';
-import 'package:bank_todo/redux/models/login_view_model.dart';
-import 'package:bank_todo/routes/assets_routes.dart';
 import 'package:bank_todo/styles/colors.dart';
 import 'package:bank_todo/ui/generateQr/generateQr.dart';
 import 'package:bank_todo/utils/utils.dart';
@@ -9,11 +6,8 @@ import 'package:bank_todo/widget/widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../generated/l10n.dart';
-import '../../generated/l10n.dart';
 import '../../generated/l10n.dart';
 
 class transferMoneyScreen extends StatefulWidget {
@@ -24,25 +18,30 @@ class transferMoneyScreen extends StatefulWidget {
 class _transferMoneyScreenState extends State<transferMoneyScreen> {
   final _formKey = GlobalKey<FormState>();
   String _id;
+  bool initial = true;
   bool _type;
 
   bool _typeProfile;
   int _size;
   String _comment;
+  String _stringType;
+  String _stringTypeProfile;
   TextEditingController _controllerCount = TextEditingController();
   TextEditingController _controllerComment = TextEditingController();
   Utils utils = Utils();
 
-  refresh() {
-    setState(() {});
-  }
+  refresh() {}
 
   @override
   Widget build(BuildContext context) {
-    String _stringType = AppLocalizations.of(context).americandollar;
-    String _stringTypeProfile = AppLocalizations.of(context).stream;
+    if (initial) {
+      _stringType = AppLocalizations.of(context).americandollar;
+      _stringTypeProfile = AppLocalizations.of(context).stream;
+      initial = false;
+    }
     return Scaffold(
-      appBar: WidgetProyect().widgetAppbar(context,AppLocalizations.of(context).generateQr),
+      appBar: WidgetProyect()
+          .widgetAppbar(context, AppLocalizations.of(context).generateQr),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
@@ -55,7 +54,7 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
                     width: double.infinity,
                     child: new DropdownButton<String>(
                       isExpanded: true,
-                      hint: Text(_stringType),
+                      value: _stringType,
                       items: <String>[
                         AppLocalizations.of(context).americandollar,
                         AppLocalizations.of(context).colombianpeso
@@ -66,16 +65,15 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
                         );
                       }).toList(),
                       onChanged: (data) {
-                        print("hola" + data);
-                        _stringType = data;
+                        setState(() {
+                          _stringType = data;
+                        });
                         if (data ==
                             AppLocalizations.of(context).americandollar) {
                           _type = true;
                         } else {
                           _type = false;
                         }
-
-                        refresh();
                       },
                     ),
                   ),
@@ -130,9 +128,7 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
                   Container(
                     width: double.infinity,
                     child: new DropdownButton<String>(
-                      hint: Text(_stringTypeProfile),
                       value: _stringTypeProfile,
-
                       items: <String>[
                         AppLocalizations.of(context).stream,
                         AppLocalizations.of(context).ahorro
@@ -143,13 +139,14 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
                         );
                       }).toList(),
                       onChanged: (data) {
-                        _stringTypeProfile = data;
+                        setState(() {
+                          _stringTypeProfile = data;
+                        });
                         if (data == AppLocalizations.of(context).stream) {
                           _typeProfile = true;
                         } else {
                           _typeProfile = false;
                         }
-                        refresh();
                       },
                     ),
                   ),
@@ -175,11 +172,12 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
         color: AppColors.mainColor,
         onPressed: () {
           if (_type == null) {
-
-            Fluttertoast.showToast(msg: AppLocalizations.of(context).selectaccounttype);
+            Fluttertoast.showToast(
+                msg: AppLocalizations.of(context).selectaccounttype);
           }
           if (_typeProfile == null) {
-            Fluttertoast.showToast(msg: AppLocalizations.of(context).currentAccount);
+            Fluttertoast.showToast(
+                msg: AppLocalizations.of(context).currentAccount);
           }
           if (_formKey.currentState.validate() == true &&
               _type != null &&
@@ -189,7 +187,6 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
             final FirebaseAuth auth = FirebaseAuth.instance;
 
             final User user = auth.currentUser;
-            final uid = user.uid;
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -197,15 +194,16 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
                         id: user.uid,
                         size: count,
                         type: _type,
+                        typeProfile: _typeProfile,
                         comment: comment,
                       )),
             );
           }
         });
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _type = true;
     _typeProfile = true;
