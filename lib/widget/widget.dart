@@ -28,15 +28,16 @@ class WidgetProyect {
           height: 10,
         ),
         Text(
-          '$type',
+          type != true?AppLocalizations.of(context).colombianpeso:AppLocalizations.of(context).americandollar ,
           style: TextStyle(
               color: Colors.grey, fontSize: AdaptScreen.screenWidth() * 0.05),
         ),
         SizedBox(
           height: 10,
         ),
+
         Text(
-          typeProfile.toString(),
+          typeProfile == true ?AppLocalizations.of(context).stream:AppLocalizations.of(context).ahorro,
           style: TextStyle(
               color: Colors.grey, fontSize: AdaptScreen.screenWidth() * 0.05),
         ),

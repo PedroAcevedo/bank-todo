@@ -345,10 +345,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Operacion exitosa`
+  /// `Successful operation`
   String get operationSucefull {
     return Intl.message(
-      'Operacion exitosa',
+      'Successful operation',
       name: 'operationSucefull',
       desc: '',
       args: [],

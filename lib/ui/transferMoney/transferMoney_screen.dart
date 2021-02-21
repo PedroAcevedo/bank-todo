@@ -49,7 +49,7 @@ class _transferMoneyScreenState extends State<transferMoneyScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 100.0),
+                  SizedBox(height: 20),
                   Container(
                     width: double.infinity,
                     child: new DropdownButton<String>(

@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
     "insufficientbalance" : MessageLookupByLibrary.simpleMessage("insufficient balance"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
-    "operationSucefull" : MessageLookupByLibrary.simpleMessage("Operacion exitosa"),
+    "operationSucefull" : MessageLookupByLibrary.simpleMessage("Successful operation"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "passwordError" : MessageLookupByLibrary.simpleMessage("The password is too short"),
     "passwordHint" : MessageLookupByLibrary.simpleMessage("Please enter a password"),

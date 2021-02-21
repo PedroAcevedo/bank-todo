@@ -57,13 +57,15 @@ class _generateQrScreenState extends State<generateQrScreen> {
       converter: (store) => LoginViewModel.fromStore(store),
       distinct: false,
       builder: (_, viewModel) => Scaffold(
+        appBar: WidgetProyect()
+            .widgetAppbar(context, AppLocalizations.of(context).generateQr),
         body: SafeArea(
           child: Container(
               child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 20,
                 ),
                 Center(
                   child: QrImage(

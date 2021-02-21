@@ -31,6 +31,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   int _groupValue = -1;
   bool status = false;
+  String code;
 
   Widget _myRadioButton({String title, int value, Function onChanged}) {
     return RadioListTile(
@@ -185,7 +186,10 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
       });
-      _showModal(context, result.code);
+      if(code != result.code) {
+        code = result.code;
+        _showModal(context, result.code);
+      }
     });
   }
 
