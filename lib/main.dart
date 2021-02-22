@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
+          supportedLocales: AppLocalizations.delegate.supportedLocales,
           theme: ThemeData(
               fontFamily: 'Montserrat',
               primaryColor: AppColors.mainColor,
